@@ -1,2 +1,2 @@
-# python_design_model
-python设计模式
+# python设计模式
+
