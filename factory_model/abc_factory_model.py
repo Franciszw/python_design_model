@@ -1,5 +1,4 @@
-from abc import ABC,abstractmethod
-from factory_model.simple_factory_model import Chart,BarChart,PieChart
+from abc import ABCMeta,abstractmethod
 
 """
 需求：
@@ -20,12 +19,66 @@ from factory_model.simple_factory_model import Chart,BarChart,PieChart
 如果某个具体工厂选择失误将会导致界面显示混乱，虽然我们可以适当增加一些约束语句，但客户端代码和配置文件都较为复杂。   
 """
 
+class Button(metaclass=ABCMeta):
+    @abstractmethod
+    def display(self):
+        pass
 
+class GreenButton(Button):
 
+    def display(self):
+        print(f'green button')
 
+class BlueButton(Button):
 
+    def display(self):
+        print(f'blue button')
 
+class Border(metaclass=ABCMeta):
+    @abstractmethod
+    def display(self):
+        pass
 
+class GreenBorder(Border):
+    def display(self):
+        print(f'green border')
+
+class BlueBorder(Border):
+    def display(self):
+        print(f'blue border')
+
+class Text(metaclass=ABCMeta):
+    @abstractmethod
+    def display(self):
+        pass
+
+class GreenText(Text):
+    def display(self):
+        print(f'green text')
+
+class BlueText(Text):
+    def display(self):
+        print(f'blue text')
+
+class Style(metaclass=ABCMeta):
+    def creat_style(self):
+        pass
+
+class SpringStyle(Style):
+    def creat_style(self):
+        button = GreenButton().display()
+        border = GreenBorder().display()
+        text = GreenText().display()
+
+class SummerStyle(Style):
+    def creat_style(self):
+        button = BlueButton().display()
+        border = BlueBorder().display()
+        text = BlueText().display()
+
+if __name__ == '__main__':
+    obj = SummerStyle()
+    obj.creat_style()
 
 
 

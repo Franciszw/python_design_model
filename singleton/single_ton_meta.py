@@ -1,4 +1,5 @@
 """
+元类实现单例模式
 1.元类type是用来生成类的，继承了元类的类，也具有生成类的功能了
 2.一个类的生产默认使用type，如果不想使用type需要指明你使用的元类，因为类括号后面的使用非命名参数传递的都被认为是父类，指定元类只能使用命名参数
 3.类名称加（）能生成对象是因为调用了元类的__call__方法
@@ -11,8 +12,10 @@ class MyType(type):
 
     def __call__(self, *args, **kwargs):
         if not self.instance:
-            self.instance = self.__new__(self)
-            self.__init__(self.instance,*args,**kwargs)
+            self.instance = super().__call__(*args,**kwargs)
+            #掉用父类的__call__,就是干了下面的活
+            # self.instance = self.__new__(self)
+            # self.__init__(self.instance,*args,**kwargs)
         return self.instance
 
 class SingleT(metaclass=MyType):
